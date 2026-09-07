@@ -1,7 +1,0 @@
-import { Activity, Building2, FileText, Wallet } from 'lucide-react';
-import { money } from '../../lib';
-import type { Business, AppRow, Inquiry, Invoice } from '../../types';
-import AdminHeader from './AdminHeader';
-function AdminHome({biz,apps,inq,inv,volume,commission}:{biz:Business[];apps:AppRow[];inq:Inquiry[];inv:Invoice[];volume:number;commission:number}){return <><AdminHeader title="Dashboard"/><div className="stats-grid">{[['Aktive Reparaturbetriebe',biz.filter(x=>x.active).length],['Partneranfragen',apps.length],['Kundenanfragen',inq.length],['Abgeschlossene Aufträge',inq.filter(x=>x.status==='completed').length],['Vermitteltes Auftragsvolumen',money(volume)],['Gesamte Provision',money(commission)],['Offene Rechnungen',inv.filter(x=>x.status==='offen').length],['Überfällig',inv.filter(x=>x.status==='überfällig').length]].map(([a,b])=><div className="stat-card" key={a as string}><span>{a as string}</span><strong>{b as any}</strong></div>)}</div><div className="grid-2"><div className="card"><h3>Letzte Kundenanfragen</h3>{inq.slice(0,5).map(i=><div className="mini-row" key={i.id}><b>{i.inquiry_id}</b><span>{i.business_name}</span><span className="badge">{i.status}</span></div>)}{!inq.length&&<div className="empty small">Noch keine Daten vorhanden.</div>}</div><div className="card"><h3>System</h3><p className="muted">Öffentlich werden ausschließlich aktive Betriebe angezeigt. Finanz- und Anfragedaten werden nicht blind gelöscht.</p></div></div></>}
-
-export default AdminHome;
