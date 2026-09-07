@@ -1,1 +1,0 @@
--- Absichtlich leer: WASCHMATIK startet ohne Demo-Betriebe, Kunden, Anfragen oder Rechnungen.
