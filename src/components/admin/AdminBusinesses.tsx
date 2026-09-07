@@ -1,0 +1,9 @@
+import { useState } from 'react';
+import { cls } from '../../lib';
+import type { Business } from '../../types';
+import { supabase } from '../../lib';
+import AdminHeader from './AdminHeader';
+import BusinessForm from './BusinessForm';
+function AdminBusinesses({biz,refresh}:{biz:Business[];refresh:()=>void}){const [editing,setEditing]=useState<Business|null>(null);const [open,setOpen]=useState(false);return <><AdminHeader title="Reparaturbetriebe" action={<button className="primary" onClick={()=>{setEditing(null);setOpen(true)}}>＋ Neuer Betrieb</button>}/><div className="card"><div className="table-wrap"><table className="table"><thead><tr><th>Betrieb</th><th>Ort</th><th>E-Mail</th><th>Status</th><th>Servicegebiete</th><th>Aktionen</th></tr></thead><tbody>{biz.map(b=><tr key={b.id}><td><b>{b.name}</b></td><td>{b.city}</td><td>{b.email}</td><td><span className={cls('badge',!b.active&&'red')}>{b.active?'active':'inactive'}</span></td><td>{Array.isArray(b.service_area)?b.service_area.join(', '):b.service_area}</td><td><div className="row-actions"><button className="small secondary" onClick={()=>{setEditing(b);setOpen(true)}}>Bearbeiten</button><button className={cls('small',b.active?'danger-btn':'secondary')} onClick={async()=>{if(!supabase)return;const {error}=await supabase.from('businesses').update({active:!b.active}).eq('id',b.id);if(!error)refresh()}}>{b.active?'Deaktivieren':'Aktivieren'}</button><button className="small danger-btn" onClick={async()=>{if(!supabase||!confirm('Betrieb wirklich löschen?'))return;const {error}=await supabase.from('businesses').delete().eq('id',b.id);if(error)alert(error.message);else refresh()}}>Löschen</button></div></td></tr>)}</tbody></table>{!biz.length&&<div className="empty">Noch keine Daten vorhanden. Lege den ersten echten Betrieb an.</div>}</div></div>{open&&<BusinessForm initial={editing} close={()=>setOpen(false)} refresh={refresh}/>}</>}
+
+export default AdminBusinesses;
