@@ -1,0 +1,35 @@
+WASCHMATIK LIVE-CHECKLIST
+
+1. Supabase-Projekt erstellen/verbinden
+2. 3 SQL-Migrationen ausführen
+3. Edge Functions deployen
+4. Resend-Absenderdomain verifizieren
+5. Supabase Secrets setzen
+6. Admin-User waschmatik@gmail.com anlegen + Rolle admin setzen
+7. echte PLZ-Koordinaten importieren
+8. Vercel Public Deployment → waschmatik.de
+9. Vercel Admin Deployment → admin.waschmatik.de
+10. HTTPS/DNS prüfen
+11. Test: öffentliche Anfrage → Anfrage-ID → Partner-Mail
+12. Test: Admin E-Mail/Passwort → Freigabe-Mail → Adminzugriff
+13. Test: Logout → Zugriff wieder gesperrt
+14. Test: Partnerregistrierung → pending → Admin-Genehmigung → Aktivierung
+15. Test: abgeschlossener Auftrag → 5-%-Provision → Rechnung/Audit-Log
+
+NIEMALS hochladen/committen:
+- SUPABASE_SECRET_KEYS
+- SUPABASE_SERVICE_ROLE_KEY
+- EMAIL_PROVIDER_API_KEY
+- INTERNAL_FUNCTION_SECRET
+- echte Passwörter
+
+
+SECURITY HARDENING V4
+- Public business search exposes only public partner fields; direct anonymous business table access revoked.
+- Admin approval token consumption is atomic and one-time.
+- Public inquiry creation has DB-backed rate limiting and stricter validation.
+- Inquiry commission is recalculated server-side on status changes.
+- Invoice status changes are server-side and audited.
+- Partner terms acceptance is required and timestamp/version are server-generated.
+- CSP added to Vercel headers.
+- Dependency versions are pinned in package.json.
