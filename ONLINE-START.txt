@@ -1,0 +1,14 @@
+WASCHMATIK – ONLINE START
+
+Das Projekt ist jetzt für den echten Full-Stack-Betrieb vorbereitet:
+- WASCHMATIK öffentliche Website
+- getrenntes Admin-Frontend admin.waschmatik.de
+- Supabase Datenbank/Auth/Edge Functions
+- serverseitiger Mailversand
+- Partnerbereich
+- 5-%-Provision und Rechnungen
+- Audit-Log
+
+Wichtig: Die tatsächliche Veröffentlichung braucht Zugriff auf dein eigenes Vercel-/Supabase-Konto und die Domain waschmatik.de. Diese Zugangsdaten sollen nicht hier im Chat geteilt werden.
+
+Siehe DEPLOY-HANDY.md für die Einrichtung.
