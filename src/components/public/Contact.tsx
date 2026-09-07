@@ -1,0 +1,4 @@
+import { Mail, MapPin } from 'lucide-react';
+function Contact(){return <main><section className="page-top"><div className="shell"><div className="eyebrow">KONTAKT</div><h1>Kontakt zu WASCHMATIK</h1><p>Fragen zur Vermittlung, zu Partnern oder zu deinen Daten? Schreib uns.</p></div></section><section><div className="shell two-col"><div className="card"><Mail size={30}/><h2>waschmatik@gmail.com</h2><p className="muted">Der zentrale Kontakt zu WASCHMATIK. Reparaturbetriebe kontaktieren dich anschließend über die bei der Anfrage angegebenen Kontaktdaten.</p><a className="primary btn-link" href="mailto:waschmatik@gmail.com">E-Mail schreiben</a></div><div className="card"><MapPin size={30}/><h2>Betreiberin</h2><p className="muted">Cornelia Schneider<br/>Am Werres 12<br/>41542 Dormagen<br/>Deutschland</p></div></div></section></main>}
+
+export default Contact;

@@ -1,0 +1,7 @@
+import { supabase } from '../../lib';
+import { cls } from '../../lib';
+import type { AppRow } from '../../types';
+import AdminHeader from './AdminHeader';
+function AdminApps({apps,refresh}:{apps:AppRow[];refresh:()=>void}){const approve=async(a:AppRow)=>{if(!supabase)return;const {error}=await supabase.functions.invoke('approve-partner',{body:{application_id:a.id}});if(error)alert(error.message);else refresh()};return <><AdminHeader title="Partneranfragen"/><div className="card"><div className="table-wrap"><table className="table"><thead><tr><th>Betrieb</th><th>Kontakt</th><th>Ort</th><th>Datum</th><th>Status</th><th>Aktionen</th></tr></thead><tbody>{apps.map(a=><tr key={a.id}><td><b>{a.business_name}</b><div className="small muted">{a.email}</div></td><td>{a.contact_person}</td><td>{a.postal_code} {a.city}</td><td>{new Date(a.created_at).toLocaleDateString('de-DE')}</td><td><span className={cls('badge',a.status==='rejected'&&'red')}>{a.status}</span></td><td><button className="small secondary" onClick={()=>alert(JSON.stringify(a,null,2))}>Ansehen</button>{a.status==='pending'&&<><button className="small secondary" onClick={()=>approve(a)}>Freigeben</button><button className="small danger-btn" onClick={async()=>{if(!supabase)return;await supabase.from('partner_applications').update({status:'rejected'}).eq('id',a.id);refresh()}}>Ablehnen</button></>}</td></tr>)}</tbody></table>{!apps.length&&<div className="empty">Noch keine Partneranfragen vorhanden.</div>}</div></div></>}
+
+export default AdminApps;
