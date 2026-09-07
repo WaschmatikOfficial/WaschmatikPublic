@@ -1,4 +1,0 @@
-
-function Footer({nav}:{nav:(x:string)=>void}){return <footer className="footer"><div className="shell footer-grid"><div><div className="brand light">WASCH<span>MATIK</span></div><p>Schluss mit dem Schleudertraumer!</p><p className="muted-light">Vermittlungsplattform für Waschmaschinen-Reparaturen in Nordrhein-Westfalen.</p></div><div><h4>Navigation</h4><button onClick={()=>nav('home')}>Startseite</button><button onClick={()=>nav('finder')}>Reparaturbetrieb finden</button><button onClick={()=>nav('partner')}>Partner werden</button><button onClick={()=>nav('contact')}>Kontakt</button></div><div><h4>Rechtliches</h4><button onClick={()=>nav('legal/impressum')}>Impressum</button><button onClick={()=>nav('legal/datenschutz')}>Datenschutz</button><button onClick={()=>nav('legal/partner')}>Partnerbedingungen</button></div><div><h4>Für Partner</h4><button onClick={()=>nav('partner-login')}>Partner-Login</button></div></div></footer>}
-
-export default Footer;
